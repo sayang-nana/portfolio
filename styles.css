@@ -464,8 +464,8 @@ main {
 
 .contact-project-container {
     display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack sections vertically */
-    align-items: center; /* Center items */
+    justify-content: center; /* Center items horizontally */
+    align-items: flex-start; /* Align items at the start */
     margin-top: 4rem; /* Add some space above */
     width: 100%; /* Ensure full width */
 }
@@ -473,12 +473,13 @@ main {
 .contact-section {
     flex: 1; /* Allow this section to take available space */
     margin-right: 2rem; /* Add space between sections */
+    text-align: center; /* Center text */
 }
 
 .project-section {
-    width: 100%; /* Full width for mobile */
+    flex: 1; /* Allow this section to take available space */
+    margin-left: 2rem; /* Add space between sections */
     text-align: center; /* Center text */
-    margin: 0; /* Remove left and right margins */
 }
 
 .navbar {
@@ -511,4 +512,11 @@ main {
     border: none;
     height: 2px;
     background-color: #000000;
+}
+
+/* Ensure both sections are centered on larger screens */
+@media (min-width: 769px) {
+    .contact-project-container {
+        flex-direction: row; /* Align sections side by side */
+    }
 }
