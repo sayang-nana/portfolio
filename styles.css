@@ -187,7 +187,8 @@ main {
     height: 380px;
     object-fit: cover;
     filter: grayscale(100%);
-    border-radius: 4px;
+    border-color: #000;
+    border-radius: 6px;
 }
 
 /* Speech bubble */
@@ -240,11 +241,12 @@ main {
     text-decoration: none;
     color: var(--text-dark);
     transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.43);
 }
 
 .contact-btn:hover {
     background: #f0f0f0;
-    transform: translateX(5px);
+    transform: translateY(-2px);
 }
 
 .contact-btn img {
@@ -259,45 +261,160 @@ main {
 /* Responsive design */
 @media (max-width: 1024px) {
     .hero {
-        height: 50vh;
+        height: 50vh; /* Adjust height for medium screens */
         margin: 0.5rem;
         width: calc(100% - 1rem);
     }
 
     .portfolio-text {
-        font-size: 4rem;
+        font-size: 6vw; /* Use viewport width for responsive font size */
     }
 
     .hashtags {
-        top: 6rem;
+        top: 6rem; /* Adjust position for medium screens */
     }
 
     .hashtag {
-        font-size: 0.9rem;
+        font-size: 0.9rem; /* Adjust font size */
     }
 }
 
 @media (max-width: 768px) {
     .hero {
-        height: 40vh;
+        height: 40vh; /* Adjust height for smaller screens */
         margin: 0.25rem;
         width: calc(100% - 0.5rem);
     }
 
     .portfolio-text {
-        font-size: 3rem;
+        font-size: 8vw; /* Use viewport width for responsive font size */
         right: 1.5rem;
         bottom: 1.5rem;
     }
 
     .hashtags {
-        top: 5rem;
+        top: 5rem; /* Adjust position for smaller screens */
         left: 1.5rem;
         gap: 0.5rem;
     }
 
     .hashtag {
-        font-size: 0.85rem;
+        font-size: 0.85rem; /* Adjust font size */
+    }
+
+    /* Adjusting the profile section */
+    .profile-section {
+        margin-bottom: 0; /* Remove negative margin */
+        margin-top: 1rem; /* Add some space above */
+        display: flex; /* Use flexbox for layout */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+    }
+
+    .profile-img {
+        margin-left: 0; /* Remove left margin */
+        margin-top: 1rem; /* Add top margin */
+        width: 80%; /* Make the image responsive */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    /* Adjusting the contact-project-container */
+    .contact-project-container {
+        flex-direction: column; /* Stack sections vertically */
+        align-items: center; /* Center items */
+        margin-top: 2rem; /* Add space above */
+    }
+
+    .contact-section, .project-section {
+        margin-right: 0; /* Remove right margin */
+        margin-left: 0; /* Remove left margin */
+        width: 100%; /* Full width for mobile */
+        text-align: center; /* Center text */
+        margin-bottom: 2rem; /* Add space below each section */
+    }
+
+    .contact-buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: center; /* Center buttons */
+        width: 100%; /* Full width for buttons */
+    }
+
+    .contact-btn {
+        width: 100%; /* Full width for buttons */
+        max-width: 300px; /* Limit max width */
+        padding: 1rem; /* Increase padding for better touch targets */
+        font-size: 1rem; /* Adjust button text size */
+    }
+
+    .speech-bubble {
+        max-width: 90%; /* Limit width for mobile */
+        margin: 1rem auto; /* Center the speech bubble */
+    }
+
+    .navbar {
+        flex-direction: column; /* Stack navbar items vertically */
+        align-items: center; /* Center navbar items */
+    }
+
+    .navbar ul {
+        flex-direction: column; /* Stack items vertically */
+        gap: 1rem; /* Space between items */
+    }
+
+    .navbar li {
+        font-size: 0.9rem; /* Adjust font size */
+    }
+
+    .project-section h3 {
+        font-size: 1.5rem; /* Adjust heading size */
+    }
+
+    .project-bubble {
+        width: 90%; /* Make project bubble responsive */
+        margin: 1rem auto; /* Center the project bubble */
+        padding: 1.5rem; /* Adjust padding for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        height: 35vh; /* Further adjust height for very small screens */
+    }
+
+    .portfolio-text {
+        font-size: 10vw; /* Increase font size for better visibility */
+    }
+
+    .profile-section h2 {
+        font-size: 2rem; /* Adjust heading size */
+    }
+
+    .profile-section h1 {
+        font-size: 3rem; /* Adjust heading size */
+    }
+
+    .speech-bubble h3 {
+        font-size: 1.5rem; /* Adjust heading size */
+    }
+
+    .speech-bubble p {
+        font-size: 1rem; /* Adjust paragraph size */
+    }
+
+    .contact-section h3 {
+        font-size: 1.25rem; /* Further adjust heading size */
+    }
+
+    .contact-btn span {
+        font-size: 0.9rem; /* Adjust button text size */
+    }
+
+    .project-section h3 {
+        font-size: 1.25rem; /* Further adjust heading size */
+    }
+
+    .project-bubble {
+        padding: 1rem; /* Adjust padding for very small screens */
     }
 }
 
@@ -314,4 +431,74 @@ main {
 
 .portfolio-letter:hover {
     transform: translateY(-20px);
+}
+
+.line {
+    margin-top: 75px;
+    margin-bottom: 10px;
+    border: none;
+    height: 1px;
+    background-color: #000000;
 } 
+.project{
+    margin-top: 4.5rem;
+    font-weight: 500;
+    font-size: 1.75rem;
+}
+.project-bubble{
+    margin-top: 2rem;
+    background: #cacaca;
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 550px;
+    margin: 1rem 0;
+}
+
+.contact-project-container {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between the two sections */
+    align-items: flex-start; /* Align items at the start */
+    margin-top: 4rem; /* Add some space above */
+}
+
+.contact-section {
+    flex: 1; /* Allow this section to take available space */
+    margin-right: 2rem; /* Add space between sections */
+}
+
+.project-section {
+    flex: 1; /* Allow this section to take available space */
+    margin-left: 2rem;
+}
+
+.navbar {
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center the navigation items */
+    margin-top: 1rem; /* Space above the navbar */
+}
+
+.navbar ul {
+    list-style: none; /* Remove bullet points */
+    display: flex; /* Align items in a row */
+    gap: 2rem; /* Space between items */
+}
+
+.navbar li {
+    font-size: 1rem; /* Font size for navigation items */
+}
+
+.navbar a {
+    text-decoration: none; /* Remove underline */
+    color: var(--text-dark); /* Text color */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.navbar a:hover {
+    color: var(--primary-blue); /* Change color on hover */
+}
+.navtopline{
+    margin-top: 1rem;
+    border: none;
+    height: 2px;
+    background-color: #000000;
+}
