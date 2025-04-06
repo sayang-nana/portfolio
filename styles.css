@@ -125,9 +125,10 @@ main {
     font-size: 0.95rem;
     color: var(--text-light);
     cursor: pointer;
-    transition: opacity 0.3s ease;
+    transition: transform 0.3s ease, filter 0.3s ease;
     font-weight: 500;
 }
+
 
 /* Portfolio text */
 .portfolio-text {
@@ -190,6 +191,11 @@ main {
     filter: grayscale(100%);
     border-color: #000;
     border-radius: 6px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+.profile-img:hover {
+    filter: grayscale(0%); /* Remove grayscale on hover */
+    transform: scale(1.1); /* Grow the image slightly */
 }
 
 /* Speech bubble */
@@ -377,10 +383,9 @@ main {
     }
 
     .project-bubble {
-        width: 90%; /* Make project bubble responsive */
-        max-width: 550px; /* Limit max width */
-        margin: 1rem auto; /* Center the project bubble */
-        padding: 2rem; /* Adjust padding */
+        max-width: 90%; /* Make project bubble responsive */
+        font-size: 1rem;
+        margin: 1rem auto;
     }
 }
 
@@ -430,28 +435,37 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden; /* Hide overflow to prevent text from showing outside */
+    animation: roll 2s ease-in-out forwards; /* Apply the roll animation */
 }
 
 .portfolio-letter {
     display: inline-block;
-    transition: transform 0.3s ease;
+    animation: letterRoll 0.5s ease-in-out forwards; /* Apply the letter roll animation */
 }
 
-.portfolio-letter:hover {
-    transform: translateY(-20px);
-}
+/* Stagger the animation for each letter */
+.portfolio-letter:nth-child(1) { animation-delay: 0s; }
+.portfolio-letter:nth-child(2) { animation-delay: 0.1s; }
+.portfolio-letter:nth-child(3) { animation-delay: 0.2s; }
+.portfolio-letter:nth-child(4) { animation-delay: 0.3s; }
+.portfolio-letter:nth-child(5) { animation-delay: 0.4s; }
+.portfolio-letter:nth-child(6) { animation-delay: 0.5s; }
+.portfolio-letter:nth-child(7) { animation-delay: 0.6s; }
+.portfolio-letter:nth-child(8) { animation-delay: 0.7s; }
+.portfolio-letter:nth-child(9) { animation-delay: 0.8s; }
 
 .line {
     margin-top: 75px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     border: none;
     height: 1px;
     background-color: #000000;
 } 
 .project{
-    margin-top: 4.5rem;
+    margin-top: 1rem;
     font-weight: 500;
-    font-size: 1.75rem;
+    font-size: 2rem;
 }
 .project-bubble{
     margin-top: 2rem;
@@ -464,10 +478,29 @@ main {
 
 .contact-project-container {
     display: flex; /* Use flexbox for layout */
-    justify-content: center; /* Center items horizontally */
-    align-items: flex-start; /* Align items at the start */
+    flex-direction: column; /* Stack sections vertically */
+    align-items: center; /* Center items */
     margin-top: 4rem; /* Add some space above */
     width: 100%; /* Ensure full width */
+}
+
+.video-section {
+    flex: 1; /* Allow this section to take available space */
+    margin: 0; /* Remove fixed margins */
+    width: 100%; /* Make it responsive */
+}
+
+#project-video {
+    width: 100%; /* Make the video responsive */
+    max-width: 600px; /* Set a max width for larger screens */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 6px; /* Optional: add border radius */
+}
+
+.project-section {
+    flex: 1; /* Allow this section to take available space */
+    margin-right: 2rem; /* Add space between sections */
+    text-align: center; /* Center text */
 }
 
 .contact-section {
@@ -478,7 +511,7 @@ main {
 
 .project-section {
     flex: 1; /* Allow this section to take available space */
-    margin-left: 2rem; /* Add space between sections */
+    margin-left: 0rem; /* Add space between sections */
     text-align: center; /* Center text */
 }
 
@@ -510,7 +543,7 @@ main {
 .navtopline{
     margin-top: 1rem;
     border: none;
-    height: 2px;
+    height: 1px;
     background-color: #000000;
 }
 
@@ -520,3 +553,138 @@ main {
         flex-direction: row; /* Align sections side by side */
     }
 }
+
+@keyframes letterRoll {
+    0% { transform: translateY(100%) rotate(0deg); }
+    100% { transform: translateY(0) rotate(360deg); }
+}
+/* Stagger the animation for each letter */
+.portfolio-letter:nth-child(1) { animation-delay: 0s; }
+.portfolio-letter:nth-child(2) { animation-delay: 0.1s; }
+.portfolio-letter:nth-child(3) { animation-delay: 0.2s; }
+.portfolio-letter:nth-child(4) { animation-delay: 0.3s; }
+.portfolio-letter:nth-child(5) { animation-delay: 0.4s; }
+.portfolio-letter:nth-child(6) { animation-delay: 0.5s; }
+.portfolio-letter:nth-child(7) { animation-delay: 0.6s; }
+.portfolio-letter:nth-child(8) { animation-delay: 0.7s; }
+.portfolio-letter:nth-child(9) { animation-delay: 0.8s; }
+
+ 
+.button {
+    display: flex;
+    justify-content: center;
+    padding: 10px 15px;
+    gap: 15px;
+    background-color: #181717;
+    outline: 3px #181717 solid;
+    outline-offset: -3px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 400ms;
+    max-width: 200px; /* Set a max width for the button */
+    width: 100%; /* Make the button responsive */
+    margin-top: 2rem; /* Space above the button */
+}
+  
+.button .text {
+    color: white;
+    font-weight: 700;
+    font-size: 1em;
+    transition: 400ms;
+}
+  
+.button svg path {
+    transition: 400ms;
+}
+  
+.button:hover {
+    background-color: transparent;
+}
+  
+.button:hover .text {
+    color: #181717;
+}
+  
+.button:hover svg path {
+    fill: #181717;
+}
+
+.wrapper {
+    display: inline-flex;
+    list-style: none;
+    height: 120px;
+    width: 100%;
+    padding-top: 40px;
+    font-family: "Poppins", sans-serif;
+    justify-content: center;
+}
+
+.wrapper .icon {
+    position: relative;
+    background: #fff;
+    border-radius: 50%;
+    margin: 15px;
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip {
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    background: #000000;
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip::before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    background: #fff;
+    bottom: -3px;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon:hover .tooltip {
+    top: -45px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.project-slider {
+    display: flex; /* Use flexbox for layout */
+}
+
+.project-bubble {
+    align-items: center;
+    flex: 0 0 auto; /* Prevent flex items from shrinking */
+    width: 100%; /* Full width for mobile */
+    max-width: 500px; /* Set a max width for larger screens */
+    margin: 0 1rem; /* Add margin for spacing */
+    scroll-snap-align: start; /* Align items to the start */
+}
+
+.video-section {
+    width: 100%; /* Make the video responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
