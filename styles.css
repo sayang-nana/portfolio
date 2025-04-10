@@ -83,11 +83,11 @@ main {
 
 /* Hero section */
 .hero {
-    height: 75vh; /* Adjust height for larger screens */
-    width: 100%;
     position: relative;
-    background: var(--primary-blue);
+    height: 75vh;
+    width: 100%;
     overflow: hidden;
+    background: var(--primary-blue);
     border-radius: 20px;
     margin: 1rem;
 }
@@ -387,6 +387,58 @@ main {
         font-size: 1rem;
         margin: 1rem auto;
     }
+
+    .project-slider {
+        display: flex;
+        overflow-x: auto; /* Enable horizontal scrolling */
+        scroll-snap-type: x mandatory; /* Enable snapping on the X-axis */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        gap: 0; /* Remove gap for slider */
+        padding-bottom: 1rem; /* Add padding to avoid cutting off content if needed */
+        /* Hide scrollbar */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE and Edge */
+    }
+
+    .project-slider::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+
+    .project-bubble {
+        flex: 0 0 100%; /* Each bubble takes full width */
+        scroll-snap-align: start; /* Snap alignment to the start */
+        max-width: 100%; /* Override desktop max-width */
+        margin: 0; /* Reset margin for slider */
+        padding: 1.5rem; /* Adjust padding for mobile if needed */
+    }
+
+    .project-section {
+        /* Ensure project section allows space for dots */
+        padding-bottom: 2rem; /* Add some padding if dots overlap */
+    }
+
+    .slider-pagination {
+        text-align: center;
+        margin-top: 1rem; /* Space above the dots */
+        position: relative; /* Adjust positioning if needed */
+        bottom: 0; /* Position at the bottom of the section */
+        width: 100%;
+    }
+
+    .slider-pagination .dot {
+        display: inline-block;
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        background-color: #bbb; /* Inactive dot color */
+        margin: 0 5px;
+        cursor: pointer; /* Optional: if you add click functionality */
+        transition: background-color 0.3s ease;
+    }
+
+    .slider-pagination .dot.active {
+        background-color: #ffffff; /* Active dot color (white) */
+    }
 }
 
 @media (max-width: 480px) {
@@ -437,6 +489,8 @@ main {
     align-items: center;
     overflow: hidden; /* Hide overflow to prevent text from showing outside */
     animation: roll 2s ease-in-out forwards; /* Apply the roll animation */
+    color: #ffffff; /* Ensure text is visible */
+    margin: 0; /* Remove default margin */
 }
 
 .portfolio-letter {
@@ -671,7 +725,8 @@ main {
 }
 
 .project-slider {
-    display: flex; /* Use flexbox for layout */
+    display: flex;
+    gap: 1rem; /* Optional: Add gap between project bubbles if needed on desktop */
 }
 
 .project-bubble {
@@ -684,7 +739,37 @@ main {
 }
 
 .video-section {
-    width: 100%; /* Make the video responsive */
-    height: auto; /* Maintain aspect ratio */
+    width: 100%; 
+    height: auto; 
+}
+
+#sphere-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#sphere-container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.glass-background {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 

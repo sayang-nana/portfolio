@@ -6,6 +6,19 @@
     <title>Eshan - Graphic Design Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.150.1/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.150.1/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module" src="script.js"></script>
+    <!-- Perlin Noise -->
+    <script src="https://cdn.jsdelivr.net/npm/noisejs@2.1.0/index.min.js"></script>
+    <!-- Motion Primitives -->
     <script src="https://cdn.jsdelivr.net/npm/@motionprimitives/roll@latest"></script>
 </head>
 <body>
@@ -15,12 +28,13 @@
             <span>Eshan</span>
         </div>
         <div class="header-right">
-            <h1>Graphic Design Portfolio</h1>
+            <h1></h1>
         </div>
     </header>
 
     <main>
         <section class="hero">
+            <div id="sphere-container"></div>
             <div class="portfolio-card">
                 <div class="arrow-icon">↙</div>
                 <div class="hashtags">
@@ -31,17 +45,19 @@
                     <span class="hashtag">#Ui/Ux</span>
                 </div>
                 <div class="portfolio-text">
-                    <h2 class="portfolio-title">
-                        <span class="portfolio-letter">P</span>
-                        <span class="portfolio-letter">o</span>
-                        <span class="portfolio-letter">r</span>
-                        <span class="portfolio-letter">t</span>
-                        <span class="portfolio-letter">f</span>
-                        <span class="portfolio-letter">o</span>
-                        <span class="portfolio-letter">l</span>
-                        <span class="portfolio-letter">i</span>
-                        <span class="portfolio-letter">o</span>
-                    </h2>
+                    <div class="glass-background">
+                        <h2 class="portfolio-title">
+                            <span class="portfolio-letter">P</span>
+                            <span class="portfolio-letter">o</span>
+                            <span class="portfolio-letter">r</span>
+                            <span class="portfolio-letter">t</span>
+                            <span class="portfolio-letter">f</span>
+                            <span class="portfolio-letter">o</span>
+                            <span class="portfolio-letter">l</span>
+                            <span class="portfolio-letter">i</span>
+                            <span class="portfolio-letter">o</span>
+                        </h2>
+                    </div>
                 </div>
             </div>
         </section>
@@ -97,12 +113,18 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Pagination Dots Container -->
+                        <div class="slider-pagination">
+                            <span class="dot active"></span> <!-- Dot for Project 1 -->
+                            <span class="dot"></span> <!-- Dot for Project 2 -->
+                            <!-- Add more dots if you have more projects -->
+                        </div>
                     </div>
                 </div>
                 <hr class="line">
                 <nav class="navbar">
                     <ul>
-                        <li><a href="resume.html">Resume</a></li>
+                        <li><a href="eshan%20resume.pdf" download="Eshan_Resume.pdf" class="download-button">Download Resume</a></li>
                         <li><a href="edu.html">Education</a></li>
                     </ul>
                 </nav>
