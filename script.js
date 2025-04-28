@@ -1,23 +1,29 @@
 import * as THREE from 'three';
 
 // Wait for DOM to be fully loaded
+// HERO SECTION PERLIN SPHERE
+// This code is restored for the hero section only
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Three.js
-    console.log('Initializing Three.js...');
+    // Initialize Three.js for hero section
     const container = document.getElementById('sphere-container');
-    const heroSection = document.querySelector('.hero'); // Get the hero section
+    const heroSection = document.querySelector('.hero');
 
     if (!container || !heroSection) {
         console.error('Could not find sphere-container or hero element!');
         return;
     }
-    console.log('Found sphere-container and hero elements');
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, heroSection.clientWidth / heroSection.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ 
+        antialias: true, 
+        alpha: true,
+        powerPreference: "high-performance"
+    });
     renderer.setSize(heroSection.clientWidth, heroSection.clientHeight);
     renderer.setClearColor(0x000000, 0);
+    renderer.setPixelRatio(window.devicePixelRatio);
     container.appendChild(renderer.domElement);
 
     // Add lights
@@ -27,9 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     scene.add(light);
 
     // Sphere Geometry
-    const geometry = new THREE.SphereGeometry(2, 128, 128);
-    
-    // Enable vertex colors
+    const geometry = new THREE.SphereGeometry(2, 256, 256);
     const material = new THREE.MeshStandardMaterial({
         vertexColors: true,
         roughness: 100,
@@ -38,15 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
         depthWrite: true,
         depthTest: true
     });
-
     const sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
-
-    // Scale the sphere
     sphere.scale.set(10, 10, 10);
-
-    // Position the sphere
-    sphere.position.set(30, 2, 0);
+    sphere.position.set(35, 0, 0);
 
     // Store original positions
     const originalPositions = [];
@@ -63,93 +62,73 @@ document.addEventListener('DOMContentLoaded', function() {
     const noise = new Noise(Math.random());
     const frequency = 6.0;
     const amplitude = 0.8;
-    const teal = new THREE.Color(0x00ccff);
-    const white = new THREE.Color(0xffffff);
+    const teal = new THREE.Color('#0923a5');
+    const white = new THREE.Color('#a5f7c0');
 
     // Position camera
     camera.position.set(0, 0, 15);
-    console.log('Camera positioned at z:', camera.position.z);
 
+    // Animation variables
+    let time = 0;
     // Mouse interaction variables
     let targetRotation = { x: 0, y: 0 };
-    let currentRotation = { x: 0, y: 0 }; // Smoothed rotation from mouse
-    let baseRotationY = 0; // Base rotation independent of mouse
-    const rotationSpeed = 0.05; // Smoothing factor
+    let currentRotation = { x: 0, y: 0 };
+    let baseRotationY = 0;
+    const rotationSpeed = 0.05;
 
     // Add mouse move listener to hero section
     heroSection.addEventListener('mousemove', (event) => {
         const rect = heroSection.getBoundingClientRect();
         const mouseX = event.clientX - rect.left;
         const mouseY = event.clientY - rect.top;
-
-        // Normalize coordinates (-0.5 to 0.5)
         const normalizedX = (mouseX / rect.width) - 0.5;
         const normalizedY = (mouseY / rect.height) - 0.5;
-
-        // Set target rotation (adjust sensitivity by multiplying)
-        targetRotation.x = normalizedY * Math.PI * 0.2; // Rotate around X-axis based on Y position
-        targetRotation.y = normalizedX * Math.PI * 0.2; // Rotate around Y-axis based on X position
+        targetRotation.x = normalizedY * Math.PI * 0.2;
+        targetRotation.y = normalizedX * Math.PI * 0.2;
     });
-
-    // Add mouse leave listener to reset rotation
     heroSection.addEventListener('mouseleave', () => {
         targetRotation.x = 0;
         targetRotation.y = 0;
     });
 
-    function animate(time) {
+    function animate() {
         requestAnimationFrame(animate);
         const t = time * 0.0005;
-
+        time += 0.016; // 60fps timing (1/60 ≈ 0.016)
         const temp = new THREE.Vector3();
         const colorAttr = geometry.attributes.color;
-
         for (let i = 0; i < posAttr.count; i++) {
             temp.copy(originalPositions[i]);
             const normal = temp.clone().normalize();
-
             const offset = noise.perlin3(
-                normal.x * frequency + t,
-                normal.y * frequency + t,
-                normal.z * frequency + t
+                normal.x * frequency + t * 0.5,
+                normal.y * frequency + t * 0.5,
+                normal.z * frequency + t * 0.5
             );
-
-            const spike = 1 + amplitude * offset;
+            const spike = 1 + amplitude * offset * 0.5;
             normal.multiplyScalar(spike);
             posAttr.setXYZ(i, normal.x, normal.y, normal.z);
-
             const blend = (offset + 1) / 2;
             const mixedColor = teal.clone().lerp(white, blend);
             colorAttr.setXYZ(i, mixedColor.r, mixedColor.g, mixedColor.b);
         }
-
         posAttr.needsUpdate = true;
         colorAttr.needsUpdate = true;
         geometry.computeVertexNormals();
-
-        // Smoothly interpolate mouse-based rotation
-        currentRotation.x += (targetRotation.x - currentRotation.x) * rotationSpeed;
-        currentRotation.y += (targetRotation.y - currentRotation.y) * rotationSpeed;
-
-        // Increment base rotation
-        baseRotationY += 0.002;
-
-        // Apply combined rotation
+        // Update rotations with smoother interpolation
+        currentRotation.x += (targetRotation.x - currentRotation.x) * 0.1; // Smoother rotation
+        currentRotation.y += (targetRotation.y - currentRotation.y) * 0.1;
+        baseRotationY += 0.005; // Slower base rotation
         sphere.rotation.x = currentRotation.x;
-        sphere.rotation.y = currentRotation.y + baseRotationY; // Add base rotation to mouse rotation
-
+        sphere.rotation.y = currentRotation.y + baseRotationY;
         renderer.render(scene, camera);
     }
-
-    // Handle window resize - **important for mouse mapping**
+    // Handle window resize
     window.addEventListener('resize', () => {
         renderer.setSize(heroSection.clientWidth, heroSection.clientHeight);
         camera.aspect = heroSection.clientWidth / heroSection.clientHeight;
         camera.updateProjectionMatrix();
     });
-
-    // Start animation
-    console.log('Starting animation...');
     animate();
 });
 

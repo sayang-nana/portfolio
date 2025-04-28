@@ -6,6 +6,9 @@
     <title>Eshan - Graphic Design Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <!-- Three.js -->
     <script type="importmap">
         {
@@ -68,6 +71,19 @@
                     <h2>Hello,</h2>
                     <h1>My name<br>is Eshan Biswas</h1>
                     <img src="profile.jpg" alt="Eshan" class="profile-img">
+                    <!-- SVG Animation Container -->
+                    <div class="svg-animation-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 250" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#00b4d8;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#00f5d4;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ff0048;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <path class="line" d="M0,150 Q400,60 800,150 Q950,180 1050,150 Q1100,130 1150,150 Q1200,170 1150,190 Q1100,210 1050,190 Q950,170 1050,150 Q1200,130 1200,150" fill="none" stroke="url(#lineGradient)" stroke-width="8" stroke-dasharray="1800"/>
+                        </svg>
+                    </div>
                 </div>
 
                 <div class="intro-text">
@@ -124,12 +140,44 @@
                 <hr class="line">
                 <nav class="navbar">
                     <ul>
-                        <li><a href="eshan%20resume.pdf" download="Eshan_Resume.pdf" class="download-button">Download Resume</a></li>
-                        <li><a href="edu.html">Education</a></li>
+                        <li><h3 class="project">Education</h3></li>
                     </ul>
                 </nav>
-                <hr class="navtopline">
                 <div class="contact-section">
+                    <button class="action_has has_saved" aria-label="Download Resume" type="button" onclick="window.location.href='eshan%20resume.pdf'">
+                        <svg
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            stroke-linejoin="round"
+                            stroke-linecap="round"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            fill="none"
+                        >
+                            <path
+                                d="m19,21H5c-1.1,0-2-.9-2-2V5c0-1.1.9-2,2-2h11l5,5v11c0,1.1-.9,2-2,2Z"
+                                stroke-linejoin="round"
+                                stroke-linecap="round"
+                                data-path="box"
+                            ></path>
+                            <path
+                                d="M7 3L7 8L15 8"
+                                stroke-linejoin="round"
+                                stroke-linecap="round"
+                                data-path="line-top"
+                            ></path>
+                            <path
+                                d="M17 20L17 13L7 13L7 20"
+                                stroke-linejoin="round"
+                                stroke-linecap="round"
+                                data-path="line-bottom"
+                            ></path>
+                        </svg>
+                        <span class="button-text">Download Resume</span>
+                    </button>
                     <h3>Get In Touch</h3>
                     <div class="wrapper">
                         <div class="icon">
@@ -157,24 +205,55 @@
     </main>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Select the portfolio title
-            const portfolioTitle = document.querySelector('.portfolio-title');
+        // Initialize GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
 
-            // Check if the element exists
+        // SVG Path Animation
+        document.addEventListener("DOMContentLoaded", function() {
+            gsap.utils.toArray('.svg-animation-container').forEach((section) => {
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: section,
+                        scrub: 0.5,
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        markers: false
+                    }
+                })
+                .fromTo(
+                    section.querySelector('.line'),
+                    { strokeDashoffset: 2200 },
+                    { strokeDashoffset: 0, ease: 'none', duration: 3 }
+                );
+            });
+
+            // Existing portfolio title animation
+            const portfolioTitle = document.querySelector('.portfolio-title');
             if (portfolioTitle) {
-                // Apply the roll animation
                 Roll(portfolioTitle, {
-                    duration: 2000, // Duration of the animation in milliseconds
-                    easing: 'ease-in-out', // Easing function
-                    direction: 'up', // Direction of the roll
-                    distance: '100%', // Distance to roll
-                    loop: true // Set to true if you want it to loop
+                    duration: 2000,
+                    easing: 'ease-in-out',
+                    direction: 'up',
+                    distance: '100%',
+                    loop: true
                 });
             } else {
                 console.error("Portfolio title element not found.");
             }
         });
+
+        function syncParticlesToProjectSection() {
+            const projectSection = document.querySelector('.project-section');
+            const particlesContainer = document.getElementById('project-particles-container');
+            if (projectSection && particlesContainer) {
+                const rect = projectSection.getBoundingClientRect();
+                particlesContainer.style.top = `${window.scrollY + rect.top}px`;
+                particlesContainer.style.height = `${rect.height}px`;
+            }
+        }
+        window.addEventListener('resize', syncParticlesToProjectSection);
+        window.addEventListener('scroll', syncParticlesToProjectSection);
+        document.addEventListener('DOMContentLoaded', syncParticlesToProjectSection);
     </script>
 </body>
 </html> 
