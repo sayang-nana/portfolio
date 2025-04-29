@@ -81,7 +81,15 @@
                                     <stop offset="100%" style="stop-color:#ff0048;stop-opacity:1" />
                                 </linearGradient>
                             </defs>
-                            <path class="line" d="M0,150 Q400,60 800,150 Q950,180 1050,150 Q1100,130 1150,150 Q1200,170 1150,190 Q1100,210 1050,190 Q950,170 1050,150 Q1200,130 1200,150" fill="none" stroke="url(#lineGradient)" stroke-width="8" stroke-dasharray="1800"/>
+                            <path class="line" d=
+                            "M0,150 
+                            Q400,60 700,150 
+                            Q950,220 1050,150 
+                            Q1100,130 1150,150 
+                            Q1200,170 1150,190 
+                            Q1100,210 1050,190 
+                            Q950,170 1050,150 
+                            Q1200,130 1200,150" fill="none" stroke="url(#lineGradient)" stroke-width="8" stroke-dasharray="1800"/>
                         </svg>
                     </div>
                 </div>
@@ -137,12 +145,64 @@
                         </div>
                     </div>
                 </div>
-                <hr class="line">
-                <nav class="navbar">
-                    <ul>
-                        <li><h3 class="project">Education</h3></li>
-                    </ul>
-                </nav>
+                <div>
+                    <hr class="line">
+                </div>
+                    <h3 class="edu">Education</h3>
+                <div class="education-section">
+                    <img src="man1.png" alt="man1" class="man1">
+                    <!-- New SVG Animation Container -->
+                    <div class="education-svg-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="educationGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#cc00ff;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#ff009d;stop-opacity:0.8" />
+                                    <stop offset="100%" style="stop-color:#ff0000;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <path class="education-line"
+                                  d="M 1200 80
+                                     Q 900 120 900 160
+                                     Q 900 200 700 220
+                                     Q 500 240 500 320
+                                     Q 500 400 300 420
+                                     Q 100 440 100 550
+                                     L 50 650"
+                                  fill="none"
+                                  stroke="url(#educationGradient)"
+                                  stroke-width="9"
+                                  stroke-dasharray="10,10"/>
+                        </svg>
+                    </div>
+                    <div class="education-bubble">
+                        <div class="year-bubble">2025</div>
+                        <div class="details">
+                            <h5>VVM Shree Damodar College of Commerce and Economics</h5>
+                            <p>Bachelor in Computer Applications (GPA 8.33/10)</p>
+                        </div>
+                    </div>
+                    <div class="education-bubble">
+                        <div class="year-bubble">2020-2022</div>
+                        <div class="details">
+                            <h5>Presentation Convent Higher Secondary</h5>
+                            <p>Arts (75%)</p>
+                        </div>
+                    </div>
+                    <div class="education-bubble">
+                        <div class="year-bubble">2014-2020</div>
+                        <div class="details">
+                            <h5>Holy Spirit Institute</h5>
+                            <p>High School</p>
+                        </div>
+                    </div>
+                    <img src="man1.png" alt="man1" class="man1">
+                    <img src="man2.png" alt="man2" class="man2">
+                    <img src="man3.png" alt="man3" class="man3">
+                </div>
+                <div>
+                    <hr class="line">
+                </div>
                 <div class="contact-section">
                     <button class="action_has has_saved" aria-label="Download Resume" type="button" onclick="window.location.href='eshan%20resume.pdf'">
                         <svg
@@ -254,6 +314,42 @@
         window.addEventListener('resize', syncParticlesToProjectSection);
         window.addEventListener('scroll', syncParticlesToProjectSection);
         document.addEventListener('DOMContentLoaded', syncParticlesToProjectSection);
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const educationSection = document.querySelector('.education-section');
+            const man1 = document.querySelector('.man1');
+            const man2 = document.querySelector('.man2');
+            const man3 = document.querySelector('.man3');
+            const educationLine = document.querySelector('.education-line');
+
+            if (educationSection && man1 && man2 && man3 && educationLine) {
+                const pathLength = educationLine.getTotalLength();
+                educationLine.style.strokeDasharray = pathLength;
+                educationLine.style.strokeDashoffset = pathLength;
+
+                // Create a timeline for the animations
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: educationSection,
+                        start: 'top 70%', // Start when the section is 80% down the viewport
+                        end: 'bottom top',
+                        scrub: 0.5,
+                        markers: false
+                    }
+                });
+
+                // Animate the education line
+                tl.fromTo(educationLine, 
+                    { strokeDashoffset: pathLength }, 
+                    { strokeDashoffset: 0, ease: 'power1.out', duration: 1 } // Faster duration
+                );
+
+                // Animate the images
+                tl.fromTo(man1, { opacity: 0 }, { opacity: 1, duration: 0.1 }, "<0.1") // Fade in man1 faster
+                  .fromTo(man2, { opacity: 0 }, { opacity: 1, duration: 0.1 }, "<0.1") // Fade in man2 faster
+                  .fromTo(man3, { opacity: 0 }, { opacity: 1, duration: 0.1 }, "<0.1"); // Fade in man3 faster
+            }
+        });
     </script>
 </body>
 </html> 

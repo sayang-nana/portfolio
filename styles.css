@@ -173,12 +173,14 @@ main {
 }
 
 .profile-section h2 {
+    margin-top: 1rem;
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
     font-weight: 500;
 }
 
 .profile-section h1 {
+    margin-top: -1rem;
     font-size: 4rem;
     line-height: 1.1;
     margin-bottom: 2.5rem;
@@ -523,7 +525,7 @@ main {
 .portfolio-letter:nth-child(9) { animation-delay: 0.8s; }
 
 .line {
-    margin-top: 75px;
+    margin-top: 40px;
     margin-bottom: 5px;
     border: none;
     height: 1px;
@@ -873,4 +875,137 @@ main {
 }
 
 /* Add other keyframes as needed */
-  
+
+.edu{
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+    font-weight: 500;
+    font-size: 2rem;
+    text-align: center;
+}
+.education-section {
+    display: flex; /* Use flexbox for horizontal layout */
+    flex-direction: column; /* Stack bubbles vertically */
+    align-items: center; /* Center items horizontally */
+    margin: 0.75rem 0; /* Add some margin above and below */
+}
+
+.education-bubble {
+    background: #000; /* Black background for bubbles */
+    color: #fff; /* White text color */
+    padding: 2rem; /* Padding inside the bubble */
+    border-radius: 1rem; /* Rounded corners */
+    width: 100%; /* Full width */
+    max-width: 550px; /* Limit max width */
+    margin: 0.75rem 0; /* Add margin for spacing */
+    position: relative; /* Position relative for absolute positioning of year */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Optional shadow for depth */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.education-bubble:hover {
+    transform: scale(1.05); /* Slightly grow the bubble on hover */
+}
+
+/* Step positioning */
+.education-bubble:nth-of-type(1) {
+    margin-left: 0rem;
+}
+.education-bubble:nth-of-type(2) {
+    margin-left: 25rem;
+}
+.education-bubble:nth-of-type(3) {
+    margin-left: 0rem;
+}
+.education-bubble:nth-of-type(4) {
+    margin-left: -25rem;
+}
+
+.year-bubble {
+    background: #fff; /* White background for year bubble */
+    color: #000; /* Black text color */
+    padding: 0.5rem 1rem; /* Padding inside the year bubble */
+    border-radius: 1rem; /* Rounded corners */
+    font-weight: bold; /* Make the year bold */
+    position: absolute; /* Position the year bubble absolutely */
+    top: 1rem; /* Space from the top */
+    left: 1rem; /* Space from the left */
+}
+
+.details {
+    margin-top: 2rem; /* Space below the year */
+}
+
+.education-bubble h5 {
+    font-size: 1.25rem; /* Institution size */
+    margin-bottom: 0.5rem; /* Space below institution */
+}
+
+.education-bubble p {
+    font-size: 1rem; /* Description size */
+}
+
+.education-svg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.education-svg-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.education-line {
+    stroke-dashoffset: 1000;
+    transition: stroke-dashoffset 1s ease-in-out;
+}
+
+.education-section {
+    position: relative;
+    padding: 2rem;
+    margin: 2rem 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    z-index: 1;
+}
+
+.education-bubble {
+    position: relative;
+    z-index: 2;
+}
+ 
+.man1, .man2, .man3 {
+    opacity: 0; /* Start hidden */
+    position: absolute; /* Ensure they can be positioned */
+    z-index: 2; /* Ensure they appear above other elements */
+}
+
+.man1 {
+    top: calc(100% - 295px); /* Adjust this value to position it above the last bubble */
+    left: 15%; /* Center it horizontally */
+    transform: translateX(-50%); /* Center it based on its width */
+    width: 100px; /* Set a width for the image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.man2 {
+    top: calc(100% - 478px); /* Adjust this value to position it above the last bubble */
+    left: 35%; /* Center it horizontally */
+    transform: translateX(-50%); /* Center it based on its width */
+    width: 100px; /* Set a width for the image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.man3 {
+    top: calc(100% - 695px); /* Adjust this value to position it above the last bubble */
+    left: 60%; /* Center it horizontally */
+    transform: translateX(-50%); /* Center it based on its width */
+    width: 100px; /* Set a width for the image */
+    height: auto; /* Maintain aspect ratio */
+}
