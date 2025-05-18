@@ -225,3 +225,29 @@ document.addEventListener('DOMContentLoaded', function() {
     updatePagination();
 });
 
+// Profile Image Intersection Animation
+document.addEventListener('DOMContentLoaded', function() {
+    const profileImg = document.querySelector('.profile-img');
+    const svgContainer = document.querySelector('.svg-animation-container');
+
+    if (!profileImg || !svgContainer) {
+        console.error('Could not find profile image or SVG container!');
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                profileImg.classList.add('intersecting');
+            } else {
+                profileImg.classList.remove('intersecting');
+            }
+        });
+    }, {
+        threshold: 1, // Trigger when 50% of the SVG is visible
+        rootMargin: '0px' // No margin
+    });
+
+    observer.observe(svgContainer);
+});
+

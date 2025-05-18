@@ -23,8 +23,21 @@
     <script src="https://cdn.jsdelivr.net/npm/noisejs@2.1.0/index.min.js"></script>
     <!-- Motion Primitives -->
     <script src="https://cdn.jsdelivr.net/npm/@motionprimitives/roll@latest"></script>
+    <style>
+        #message-box {
+            padding: 10px;
+            border: 1px solid;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
+    <div id="mobile-warning" style="display:none;">
+      <div class="mobile-warning-content">
+        <h2>For the best experience, please open this portfolio on a desktop device.</h2>
+      </div>
+    </div>
     <header>
         <div class="logo">
             <img src="logo.png" alt="E" class="logo-img">
@@ -64,6 +77,10 @@
                 </div>
             </div>
         </section>
+        <div class="scroll-down-hint">
+            <span>Scroll down</span>
+            <span class="arrow">&#8595;</span>
+        </div>
 
         <section class="content">
             <div class="intro-section">
@@ -204,41 +221,147 @@
                     <hr class="line">
                 </div>
                 <div class="contact-section">
-                    <button class="action_has has_saved" aria-label="Download Resume" type="button" onclick="window.location.href='eshan%20resume.pdf'">
-                        <svg
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            stroke-linejoin="round"
-                            stroke-linecap="round"
-                            stroke-width="2"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            fill="none"
-                        >
-                            <path
-                                d="m19,21H5c-1.1,0-2-.9-2-2V5c0-1.1.9-2,2-2h11l5,5v11c0,1.1-.9,2-2,2Z"
-                                stroke-linejoin="round"
-                                stroke-linecap="round"
-                                data-path="box"
-                            ></path>
-                            <path
-                                d="M7 3L7 8L15 8"
-                                stroke-linejoin="round"
-                                stroke-linecap="round"
-                                data-path="line-top"
-                            ></path>
-                            <path
-                                d="M17 20L17 13L7 13L7 20"
-                                stroke-linejoin="round"
-                                stroke-linecap="round"
-                                data-path="line-bottom"
-                            ></path>
-                        </svg>
-                        <span class="button-text">Download Resume</span>
-                    </button>
+                
                     <h3>Get In Touch</h3>
+                    <!-- From Uiverse.io by gharsh11032000 --> 
+                    <div class="form-container">
+                        <form class="form" id="contact-form" onsubmit="sendEmail(event)">
+                            <div class="form-group">
+                                <label for="email">Your Email</label>
+                                <input type="text" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="textarea">How Can We Help You?</label>
+                                <textarea name="textarea" id="textarea" rows="10" cols="50" required></textarea>
+                            </div>
+                            <button class="form-submit-btn" type="submit">Submit</button>
+                        </form>
+                    </div>
+                    <div id="message-box" style="display: none; margin-top: 10px;"></div>
+                    <div>
+                            <!-- From Uiverse.io by dalbrechtmartin --> 
+                    <button class="form-submit-btn" onclick="downloadResume()">
+                        Download Resume
+                        <div class="star-1">
+                        <svg
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 784.11 815.53"
+                            style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                            version="1.1"
+                            xml:space="preserve"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <defs></defs>
+                            <g id="Layer_x0020_1">
+                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                            <path
+                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                class="fil0"
+                            ></path>
+                            </g>
+                        </svg>
+                        </div>
+                        <div class="star-2">
+                        <svg
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 784.11 815.53"
+                            style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                            version="1.1"
+                            xml:space="preserve"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <defs></defs>
+                            <g id="Layer_x0020_1">
+                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                            <path
+                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                class="fil0"
+                            ></path>
+                            </g>
+                        </svg>
+                        </div>
+                        <div class="star-3">
+                        <svg
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 784.11 815.53"
+                            style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                            version="1.1"
+                            xml:space="preserve"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <defs></defs>
+                            <g id="Layer_x0020_1">
+                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                            <path
+                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                class="fil0"
+                            ></path>
+                            </g>
+                        </svg>
+                        </div>
+                        <div class="star-4">
+                        <svg
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 784.11 815.53"
+                            style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                            version="1.1"
+                            xml:space="preserve"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <defs></defs>
+                            <g id="Layer_x0020_1">
+                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                            <path
+                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                class="fil0"
+                            ></path>
+                            </g>
+                        </svg>
+                        </div>
+                        <div class="star-5">
+                        <svg
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 784.11 815.53"
+                            style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                            version="1.1"
+                            xml:space="preserve"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <defs></defs>
+                            <g id="Layer_x0020_1">
+                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                            <path
+                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                class="fil0"
+                            ></path>
+                            </g>
+                        </svg>
+                        </div>
+                        <div class="star-6">
+                        <svg
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 784.11 815.53"
+                            style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                            version="1.1"
+                            xml:space="preserve"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <defs></defs>
+                            <g id="Layer_x0020_1">
+                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                            <path
+                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                class="fil0"
+                            ></path>
+                            </g>
+                        </svg>
+                        </div>
+                    </button>
+                    </div>
                     <div class="wrapper">
                         <div class="icon">
                             <a href="mailto:esnanbiswas.email@gmail.com" class="contact-btn email">
@@ -350,6 +473,74 @@
                   .fromTo(man3, { opacity: 0 }, { opacity: 1, duration: 0.1 }, "<0.1"); // Fade in man3 faster
             }
         });
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init("rB1DRZGQbHhGilS3U"); // Replace with your actual public key
+       })();
+    </script>
+    <script>
+        function sendEmail(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('textarea').value;
+
+            // Log the values being sent
+            console.log("Email:", email);
+            console.log("Subject:", subject);
+            console.log("Message:", message);
+
+            // Check if any fields are empty
+            if (!email || !subject || !message) {
+                showMessage("Please fill in all fields.", "error");
+                return;
+            }
+
+            emailjs.send("service_as9x719", "template_ms9sbf6", {
+                email: email,
+                subject: subject,
+                message: message
+            })
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+                showMessage('Email sent successfully!', "success");
+            }, (error) => {
+                console.log('FAILED...', error);
+                showMessage('Failed to send email. Please try again later.', "error");
+            });
+        }
+
+        // Function to show messages
+        function showMessage(message, type) {
+            const messageBox = document.getElementById('message-box');
+            messageBox.style.display = 'block';
+            messageBox.textContent = message;
+            messageBox.style.color = type === "success" ? "green" : "red"; // Change color based on type
+        }
+    </script>
+    <script>
+        function downloadResume() {
+            const link = document.createElement('a');
+            link.href = 'eshan resume.pdf'; // Path to your PDF file
+            link.download = 'eshan resume.pdf'; // Name for the downloaded file
+            document.body.appendChild(link); // Append to the body
+            link.click(); // Trigger the download
+            document.body.removeChild(link); // Remove the link after downloading
+        }
+        </script>
+    <script>
+    function isMobileDevice() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+            || window.innerWidth < 900;
+    }
+
+    if (isMobileDevice()) {
+        document.getElementById('mobile-warning').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
     </script>
 </body>
 </html> 
